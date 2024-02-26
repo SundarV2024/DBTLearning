@@ -1,0 +1,43 @@
+models:
+    - name: stg_customers
+      description: "{{ doc('customers') }}"
+      columns:
+      - name: customerid
+        description: "{{ doc('customerid') }}"
+        tests:
+          - unique
+          - not_null
+          - dq_tools.unique_where_db
+
+    - name: stg_products
+      description: "{{ doc('products') }}"
+      columns:
+        - name: productid
+          description: "{{ doc('productid') }}"
+          tests:
+            - unique
+            - dq_tools.unique_where_db
+
+    - name: stg_shipments
+      description: stores shipment details
+      columns:
+        - name: STATUS
+          tests:
+            - accepted_values:
+                values: ['shipped']
+                #values: ['shipped', 'returned', 'ordered']
+                #values: ['shipped', 'returned', 'ordered', 'replaced']
+
+    - name: stg_orders
+      description: transaction table holds all the order metrics
+      columns:
+        - name: CUSTOMERID
+          tests:
+            - relationships:
+                to: ref('stg_customers')
+                field: CUSTOMERID
+        - name: orderid
+          description: unique id represents each order in transaction table
+          tests:
+            - is_even
+            - dq_tools.unique_where_db

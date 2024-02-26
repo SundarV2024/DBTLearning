@@ -35,8 +35,33 @@ clean-targets:         # directories to be removed by `dbt clean`
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 
+
+#models:
+#  my_new_project:
+#    # Applies to all files under models/example/
+#    example:
+#      +materialized: table
+
+
+vars:
+  city: 'Nice'
+  dbt_dq_tool_schema: AUDIT
+
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  +pre-hook:
+    - "insert into {{env_var('DBT_SOURCEDB', 'QWT')}}.{{env_var('DBT_AUDITDB', 'AUDIT')}}.dbt_models_execution_log (modelname, starttime, endtime,duration) values ('{{ this }}', current_timestamp(), null, null);"
+ 
+#     - "insert into qwt.audit.dbt_models_execution_log (modelname, starttime, endtime,duration) values ('{{ this }}', current_timestamp(), null, null);"
+ 
+  +post-hook:
+    - "update {{env_var('DBT_SOURCEDB', 'QWT')}}.{{env_var('DBT_AUDITDB', 'AUDIT')}}.dbt_models_execution_log  set endtime = current_timestamp(), duration = datediff('second', starttime, current_timestamp()) where modelname = '{{this}}';"
+   
+#    - "update qwt.audit.dbt_models_execution_log  set endtime = current_timestamp(), duration = datediff('second', starttime, current_timestamp()) where modelname = '{{this}}';"
+  
+
+
+#on-run-start: "grant usage on schema qwt.audit to role accountadmin"
+#on-run-end: "grant select on table qwt.audit.dbt-models-execution-log to role accountadmin"
+
+on-run-end: 
+  - '{{ dq_tools.store_test_results(results) }}'

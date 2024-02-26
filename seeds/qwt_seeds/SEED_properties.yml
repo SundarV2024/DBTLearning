@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: divisions
+    config:
+      schema: seeddata
+  - name: categories
+    config:
+      schema: seeddata
+  - name: shippers
+    config:
+      schema: seeddata
