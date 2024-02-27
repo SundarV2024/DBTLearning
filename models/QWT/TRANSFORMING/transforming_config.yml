@@ -1,0 +1,23 @@
+version: 2
+ 
+models:
+ 
+  - name: trf_customers
+    config:
+      schema: "{{ env_var('DBT_TRANSFORMDB', 'TRANSFORMING') }}"
+
+  - name: trf_employee
+    config:
+      schema: "{{ env_var('DBT_TRANSFORMDB', 'TRANSFORMING') }}"
+  
+  - name: trf_orderdetails
+    config:
+      schema: "{{ env_var('DBT_TRANSFORMDB', 'TRANSFORMING') }}"
+  
+  - name: trf_orders
+    config:
+      schema: "{{ env_var('DBT_TRANSFORMDB', 'TRANSFORMING') }}"
+
+  - name: trf_products
+    config:
+      schema: "{{ env_var('DBT_TRANSFORMDB', 'TRANSFORMING') }}"

@@ -1,0 +1,14 @@
+version: 2
+ 
+models:
+ 
+  - name: order_by_linenos_pivot
+    config:
+      schema: "{{ env_var('DBT_REPORTSCHEMA', 'REPORTING') }}"
+
+      
+models:
+ 
+  - name: top10_employees_by_city
+    config:
+      schema: "{{ env_var('DBT_REPORTSCHEMA', 'REPORTING') }}"
