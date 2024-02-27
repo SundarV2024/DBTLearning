@@ -1,4 +1,4 @@
-{{ config(materialized = 'table', schema = 'TRANSFORMING', sql_header = 'create warehouse loading_wh;')}}
+{{ config(materialized = 'table', schema = 'TRANSFORMING')}}
 
 select 
 CUSTOMERID,
