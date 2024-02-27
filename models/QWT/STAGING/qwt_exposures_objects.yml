@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: qwt_sales_dashboard
+    type: dashboard
+    maturity: high
+    url: https://www.google.com
+    description: >
+      Exposure description
+    depends_on:
+      - ref('fct_orders')
+      - ref('dim_customers')
+
+    owner:
+      name: Jane from analytics
+      email: abc@xyz.com
