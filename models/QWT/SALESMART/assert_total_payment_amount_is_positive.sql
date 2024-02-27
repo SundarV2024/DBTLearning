@@ -3,4 +3,4 @@ select
     sum(amount) as total_amount
 from {{ ref('fct_orders') }}
 group by 1
-having not(total>amount >=0 )
+having not(total_amount >=0 )

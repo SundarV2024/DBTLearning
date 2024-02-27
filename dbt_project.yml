@@ -47,6 +47,12 @@ vars:
   city: 'Nice'
   dbt_dq_tool_schema: AUDIT
 
+
+snapshots:
+  +target_database: "{{ env_var('DBT_SOURCEDB', 'QWT') }}"
+  +target_schema: "{{ env_var('DBT_SNAPSCHEMA', 'SNAPSHOTS') }}"
+
+
 models:
   +pre-hook:
     - "insert into {{env_var('DBT_SOURCEDB', 'QWT')}}.{{env_var('DBT_AUDITDB', 'AUDIT')}}.dbt_models_execution_log (modelname, starttime, endtime,duration) values ('{{ this }}', current_timestamp(), null, null);"

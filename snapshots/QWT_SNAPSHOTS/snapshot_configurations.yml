@@ -1,0 +1,7 @@
+version : 2
+
+
+snapshots:
+  - name: trf_shipments_snapshot
+    config:
+      schema: "{{ env_var('DBT_SNAPSCHEMA', 'SNAPSHOTS') }}"

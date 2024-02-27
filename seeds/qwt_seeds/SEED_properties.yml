@@ -3,10 +3,10 @@ version: 2
 seeds:
   - name: divisions
     config:
-      schema: seeddata
+      schema: "{{ env_var('DBT_SEEDSCHEMA', 'SEEDDATA') }}"
   - name: categories
     config:
-      schema: seeddata
+      schema: "{{ env_var('DBT_SEEDSCHEMA', 'SEEDDATA') }}"
   - name: shippers
     config:
-      schema: seeddata
+      schema: "{{ env_var('DBT_SEEDSCHEMA', 'SEEDDATA') }}"
