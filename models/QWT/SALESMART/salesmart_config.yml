@@ -1,0 +1,7 @@
+version: 2
+ 
+models:
+ 
+  - name: order_by_linenos_pivot
+    config:
+      schema: "{{ env_var('DBT_MARTSCHEMA', 'SALESMART') }}"
