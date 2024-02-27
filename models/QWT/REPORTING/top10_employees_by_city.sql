@@ -1,4 +1,4 @@
-{{config(materialized='view', schema ='reporting')}}
+{{config(materialized='view', schema ='reporting') }}
 
 select 
 E.firstname,
